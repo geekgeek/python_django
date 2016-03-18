@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Django</title>
+
+    <link rel="stylesheet" href="/static/bootstrap36/css/bootstrap.min.css" type = "text/css"/>
+  </head>
+
+<body>
+<!--INLINE STYLE##########################################-->
+    <style>
+        img.desaturate {
+    	filter: grayscale(100%);
+    	-webkit-filter: grayscale(100%);
+        }
+    </style>
+<!--END INLINE STYLE##########################################-->
+
+<nav>
+      <div class="container-fluid">
+<div class="row">
+    <div class="col-md-6">
+     <!-- NAVIGATION ##########################################-->
+                <ul class="nav navbar-nav">
+                  <li><a class="navbar-brand" href="#">Django</a></li>
+                  <li><a href="#">Home</a></li>
+                  <li><a href="/blog/">blog</a></li>
+                  <li><a href="/contact/">Contact</a></li>
+                </ul>
+    <!-- END NAVIGATION ##########################################-->
+    </div>
+
+
+    <div class="col-md-6">
+<!-- LOGIN FORM ####################################################################################-->
+
+{% if request.user.is_authenticated %}
+
+    <form class="navbar-form navbar-right" action="/admin/logout/" method="post" id="login-form"><input type='hidden' name='csrfmiddlewaretoken' value="{{ csrf_token }}" />
+    <div class="form-group">
+    <button type="submit" class="btn btn-success">Log out</button>
+    </form>
+    </div>
+
+    <form class="navbar-form navbar-right" action="/admin/" method="post"><input type='hidden' name='csrfmiddlewaretoken' value="{{ csrf_token }}" />
+    <div class="form-group">
+        {% if user.is_authenticated %}Hello, {{ user.username }}.{% endif %}
+    <button type="submit" class="btn btn-success">Admin</button>
+    </form>
+
+{% else %}
+    <form class="navbar-form navbar-right" action="/admin/login/?next=/admin/" method="post" id="login-form"><input type='hidden' name='csrfmiddlewaretoken' value="{{ csrf_token }}" />
+    <div class="form-group">
+    <input id="id_username" maxlength="254" name="username" type="text" placeholder="Email" class="form-control" />
+    </div>
+    <div class="form-group">
+    <input type="password" id="exampleInputPassword1" name="password" placeholder="Password" class="form-control" >
+    <input type="hidden" name="next" value="/admin/" />
+
+    <div class="form-group">
+    <button type="submit" class="btn btn-success">Sign in</button>
+    </form>
+ {% endif %}
+    </div> <!--col md6 close-->
+</div> <!-- div row close-->
+
+<!-- END LOGIN FORM ####################################################################################-->
+</nav><!--End navigation-->
+
+
+<!-- JUMBOTRON ####################################################################################-->
+    <div class="jumbotron">
+      <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                {% for instance in queryset %}
+                    {% if instance.id == 23 %}
+
+
+                <h3>{{instance.headline}} {{instance.id}}</h3>
+                <p> {{instance.description}}</p>
+                     {% endif %}
+                {% endfor %}
+                <p><a class="btn btn-primary btn-lg" href="/blog/" role="button">Learn more &raquo;</a></p>
+            </div><!--colmd4-->
+            <div class="col-md-4">
+                <h3>Why Choose Django?</h3>
+                <iframe width="376" height="211" src="https://www.youtube.com/embed/topjvXzjdYM?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+            </div><!--colmd4-->
+
+            <div class="col-md-4">
+
+            </div> <!--colmd4-->
+        </div> <!--Row-->
+    </div> <!--container-->
+</div> <!--jumbotron-->
+
+<!-- JUMBOTRON END ####################################################################################-->
+
+
+
+
+<!--CONTAINER ####################################################################################-->
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        {% for instance in queryset %}
+            {% if instance.id <= 22 %}
+        <div class="col-md-4">
+
+
+            <h2><img src="https://cdn0.iconfinder.com/data/icons/30-hardware-line-icons/64/Connection-48.png" alt="Mountain View" style="width:48px;height:48px;" align="left">
+                {{instance.headline}}
+                {{instance.id}}
+            </h2>
+
+           <p>
+                {{instance.description}}
+           </p>
+        </div><!--colmd4-->
+            {% endif %}
+        {% endfor %}
+
+      </div><!--Row-->
+<hr>
+<!--ICONS##########################################################################################################################################################-->
+<div class="row">
+
+    {% for instance in queryset %}
+        {% if instance.id > 23 %}
+  <div class="col-md-2" >
+      {{instance.id}}
+      <img src="{{instance.description}}" alt="{{instance.headline}}" style="width:128px;" align="left" class="desaturate" >
+
+  </div>
+
+            {% endif %}
+        {% endfor %}
+
+</div><!--Row-->
+<!--END ICONS##########################################################################################################################################################-->
+
+<hr>
+
+<!--FOOTER ####################################################################################-->
+      <footer>
+          <div class="col-md-6">
+             <p>&copy; 2015 Company, Inc.</p>
+           </div><!--colmd4-->
+
+              <div class="col-md-1">
+             <p><a href="https://www.djangoproject.com/">Django</a></p>
+           </div><!--colmd4-->
+
+              <div class="col-md-1">
+             <p><a href="https://www.python.org/">Python</a></p>
+           </div><!--colmd4-->
+
+               <div class="col-md-1">
+             <p><a href="http://getbootstrap.com/">Bootstrap</a></p>
+           </div><!--colmd4-->
+
+               <div class="col-md-1">
+             <p><a href="https://www.w3.org/TR/html5/">HTML 5</a></p>
+           </div><!--colmd4-->
+
+               <div class="col-md-1">
+             <p><a href="https://www.javascript.com/">Javascript</a></p>
+           </div><!--colmd4-->
+
+                <div class="col-md-1">
+             <p><a href="https://www.mysql.com/">MySql</a></p>
+           </div><!--colmd4-->
+
+      </footer>
+<!--END FOOTER ####################################################################################-->
+    </div> <!-- END CONTAINER  #################################################################################### -->
+
+  </body>
+</html>
