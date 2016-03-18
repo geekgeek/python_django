@@ -1,0 +1,10 @@
+{% for instance in queryset %}
+    {% if instance.id > 23 %}
+      <div class="col-md-2" >
+        {{instance.id}}
+      <img src="{{instance.description}}" alt="{{instance.headline}}" style="width:128px;" align="left" class="desaturate" >
+
+  </div>
+
+    {% endif %}
+{% endfor %}
