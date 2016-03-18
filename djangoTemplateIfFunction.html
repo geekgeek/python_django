@@ -1,0 +1,11 @@
+{% for instance in queryset %}       
+
+	{% if instance.headline == "Fast" %}
+               
+		{{instance.headline}}
+               
+		{{instance.description}}
+		
+	{% endif %}
+	
+{% endfor %}
