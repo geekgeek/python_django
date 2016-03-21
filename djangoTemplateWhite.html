@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+{% for instance in queryset %}
+{% if instance.id == 44 %}
+    <title>{{instance.description}}</title>
+   {% endif %}
+{% endfor %}
+
+    <link rel="stylesheet" href="/static/bootstrap36/css/bootstrap.min.css" type = "text/css"/>
+  </head>
+
+<body>
+<!--INLINE STYLE##########################################-->
+    <style>
+        /*Images on image row*/
+        .imagerow
+        {
+        	filter: grayscale(100%);
+        	-webkit-filter: grayscale(100%);
+        }
+        .imagerow:hover
+        {
+      	    filter: grayscale(10%);
+        	-webkit-filter: grayscale(100%);
+        }
+
+
+        #ddown
+     	{
+                 background-color:white ; /* #2A2730 */
+                 color:black;
+
+        }
+
+
+        .jumbotron
+        {
+                 background-color: white; /*#7E7E7E*/
+                 color:black;
+
+
+        }
+
+        .btn
+        {
+                 background-color: #D4D0C8;
+                 color:black;
+                 border-color:black;
+
+        }
+
+        .navbar
+        {
+
+            background-color:white;
+        }
+
+        #ddd
+        {
+            float: right;
+        }
+
+
+        ul li a
+        {
+
+            color:black;
+            background-color: white;
+        }
+
+        p a
+        {
+
+           color:#139FD7;
+        }
+
+
+    </style>
+<!--END INLINE STYLE##########################################-->
+
+<!--LOGO ##########################################-->
+<nav class="navbar navbar-default">
+     <div class="container-fluid" >
+     <!-- NAVIGATION ##########################################-->
+            <ul class="nav navbar-nav navbar-left">
+                  <li>
+                       {% for instance in queryset %}
+                            {% if instance.id == 44 %}
+                                <a href="#">{{instance.description}}</a>
+                           {% endif %}
+                        {% endfor %}
+                  </li>
+
+                  <li><a  href="#"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+                  <li><a  href="/blog/"><span class="glyphicon glyphicon-th-list"></span>Blog</a></li>
+                  <li><a  href="/contact/"><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
+              </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+
+            <!-- LOGIN FORM ####################################################################################-->
+
+                {% if request.user.is_authenticated %}
+
+                    <form class="navbar-form navbar-right" action="/admin/logout/" method="post" id="login-form"><input type='hidden' name='csrfmiddlewaretoken' value="{{ csrf_token }}" />
+                    <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Log out</button>
+                    </form>
+                    </div>
+
+                    <form class="navbar-form navbar-right" action="/admin/" method="post"><input type='hidden' name='csrfmiddlewaretoken' value="{{ csrf_token }}" />
+                    <div class="form-group">
+                        {% if user.is_authenticated %}Hello, {{ user.username }}.{% endif %}
+                    <button type="submit" class="btn btn-primary">Admin</button>
+                    </form>
+
+                {% else %}
+                    <form class="navbar-form navbar-right" action="/admin/login/?next=/admin/" method="post" id="login-form"><input type='hidden' name='csrfmiddlewaretoken' value="{{ csrf_token }}" />
+                    <div class="form-group">
+                    <input id="id_username" maxlength="254" name="username" type="text" placeholder="Email" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                    <input type="password" id="exampleInputPassword1" name="password" placeholder="Password" class="form-control" >
+                    <input type="hidden" name="next" value="/admin/" />
+
+                    <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                    </form>
+                 {% endif %}
+
+            <!-- END LOGIN FORM ####################################################################################-->
+              </li>
+
+            </ul>
+        </div><!--ENDContainer ##########################################-->
+</nav><!--ENDNAV ##########################################-->
+<!--END NAVIGATION####################################################################################-->
+
+
+<!-- JUMBOTRON ####################################################################################-->
+    <div class="jumbotron">
+      <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                {% for instance in queryset %}
+                    {% if instance.id == 23 %}
+
+
+                <p>{{instance.headline}}</p>
+                <p> {{instance.description}}</p>
+                     {% endif %}
+                {% endfor %}
+                <p><a class="btn btn-primary btn-lg" href="/blog/" role="button">Learn more &raquo;</a></p>
+            </div><!--colmd4-->
+
+            {% for instance in queryset %}
+                    {% if instance.id == 43 %}
+            <div class="col-md-6">
+                <p>{{instance.headline}}</p>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe width="100%" height="300" src="{{instance.description}}" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div><!--colmd4-->
+                  {% endif %}
+            {% endfor %}
+
+
+        </div> <!--Row-->
+    </div> <!--container-->
+</div> <!--jumbotron-->
+
+<!-- JUMBOTRON END ####################################################################################-->
+
+<hr>
+
+
+<!--CONTAINER ####################################################################################-->
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        {% for instance in queryset %}
+            {% if instance.id <= 19 %}  <!--max 22-->
+        <div class="col-md-4">
+
+            <h2><img src="https://cdn0.iconfinder.com/data/icons/30-hardware-line-icons/64/Connection-48.png" alt="Mountain View"  height="48" width="48" align="left">
+                {{instance.headline}}
+            </h2>
+
+           <p>
+                {{instance.description}}
+           </p>
+        </div><!--colmd4-->
+            {% endif %}
+        {% endfor %}
+
+      </div><!--Row-->
+<hr>
+<!--ICONS##########################################################################################################################################################-->
+<div class="row">
+
+    {% for instance in queryset %}
+        {% if instance.id > 23 and instance.id < 30 %} <!--max 36-->
+  <div class="col-md-2" >
+      <img class="imagerow" src="{{instance.description}}" alt="{{instance.headline}}" width="128" align="left">
+
+  </div>
+
+        {% endif %}
+    {% endfor %}
+
+</div><!--Row-->
+</div> <!-- END CONTAINER  #################################################################################### -->
+<!--END ICONS##########################################################################################################################################################-->
+<br>
+<hr>
+<div id="ddown">
+    <br><br>
+<!--CONTAINER ####################################################################################-->
+    <div class="container">
+<!--FOOTER ####################################################################################-->
+      <footer>
+    <!--CompanyName ####################################################################################-->
+        {% for instance in queryset %}
+            {% if instance.id == 36 %}
+                <div class="col-md-6">
+                    <p> {{instance.description}}</p>
+                </div><!--colmd4-->
+            {% endif %}
+        {% endfor %}
+    <!--CompanyNameEnd ####################################################################################-->
+
+    <!--Links ####################################################################################-->
+           {% for instance in queryset %}
+                {% if instance.id > 36 and instance.id < 43 %}
+                    <div class="col-md-1">
+                        <p><a href="{{instance.description}}">{{instance.headline}}</a></p>
+                     </div><!--colmd4-->
+                 {% endif %}
+            {% endfor %}
+    <!--LinksEnd ####################################################################################-->
+      </footer>
+<!--END FOOTER ####################################################################################-->
+    </div> <!-- END CONTAINER  #################################################################################### -->
+    <br><br>
+</div> <!-- END ddown  #################################################################################### -->
+  </body>
+</html>
